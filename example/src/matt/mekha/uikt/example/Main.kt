@@ -8,14 +8,15 @@ import matt.mekha.uikt.elements.Rectangle
 import matt.mekha.uikt.elements.Scene
 import matt.mekha.uikt.util.Transform
 
-
 fun main() {
     val config = WindowConfig()
     UIKT.init(config)
 
-    val bigRect = Rectangle(Color.RED, Transform(anchorMin = Vector2(0F, 0F), anchorMax = Vector2(0.5F, 0.5F)))
-    val smallRect = Rectangle(Color.BLUE, Transform(anchor = Vector2(0.5F, 0.5F), width = 100F, height = 100F))
+    val rect = Rectangle(Color.SALMON, Transform(
+            anchor = Vector2(0.5F, 0.5F),
+            width = 100F,
+            height = 100F
+    ))
 
-    bigRect.parent = Scene
-    smallRect.parent = bigRect
+    rect.parent = Scene
 }

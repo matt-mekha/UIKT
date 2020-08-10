@@ -16,7 +16,9 @@ class Transform (
         var height: Float? = null,
         var xOffset: Float = 0F,
         var yOffset: Float = 0F,
-        var zIndex: Int = 0 // TODO implement
+        var xPivot: Float = 0.5F,
+        var yPivot: Float = 0.5F,
+        var zIndex: Int = 0
     ) {
 
     var trueX = 0F
@@ -46,7 +48,7 @@ class Transform (
         trueAnchorMax = scale(anchorMax!!, containerSize)
 
         if (oneAnchor || anchorMin!!.x == anchorMax!!.x) {
-            trueX = trueAnchorMin.x - width!!/2 + xOffset
+            trueX = trueAnchorMin.x - width!! * xPivot + xOffset
             trueWidth = width!!
         } else {
             trueX = trueAnchorMin.x + left
@@ -54,7 +56,7 @@ class Transform (
         }
 
         if (oneAnchor || anchorMin!!.y == anchorMax!!.y) {
-            trueY = trueAnchorMin.y - height!!/2 + yOffset
+            trueY = trueAnchorMin.y - height!! * yPivot + yOffset
             trueHeight = height!!
         } else {
             trueY = trueAnchorMin.y + bottom

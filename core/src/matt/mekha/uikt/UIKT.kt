@@ -1,23 +1,17 @@
 package matt.mekha.uikt
 
 import com.badlogic.gdx.ApplicationAdapter
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import matt.mekha.uikt.elements.Scene
 
-public object UIKT : ApplicationAdapter() {
+object UIKT : ApplicationAdapter() {
 
     override fun create() {
         Scene.resize()
     }
 
     override fun render() {
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f)
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-
         Scene.drawEverything()
     }
 
@@ -29,7 +23,7 @@ public object UIKT : ApplicationAdapter() {
         // TODO Scene.dispose()
     }
 
-    public fun init(windowConfig: WindowConfig) {
+    fun init(windowConfig: WindowConfig) {
         val config = LwjglApplicationConfiguration()
 
         config.width = windowConfig.width

@@ -25,6 +25,7 @@ abstract class Element(val transform: Transform) {
 
     fun drawEverything() {
         draw()
+        children.sortBy { it.transform.zIndex }
         for (child in children) {
             child.drawEverything()
         }

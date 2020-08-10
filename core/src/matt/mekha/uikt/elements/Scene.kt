@@ -1,6 +1,7 @@
 package matt.mekha.uikt.elements
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.math.Vector2
 import matt.mekha.uikt.util.Transform
 
@@ -13,6 +14,9 @@ object Scene : Element(Transform(anchorMin = Vector2(0F, 0F), anchorMax = Vector
         super.resize()
     }
 
-    override fun draw() {}
+    override fun draw() {
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f)
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+    }
 
 }

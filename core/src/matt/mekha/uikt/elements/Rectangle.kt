@@ -12,6 +12,7 @@ class Rectangle(var color: Color, transform: Transform) : Element(transform) {
         shapeRenderer.color = color
         shapeRenderer.rect(transform.trueX, transform.trueY, transform.trueWidth, transform.trueHeight)
         shapeRenderer.end()
+        shapeRenderer.dispose()
     }
 
 }
