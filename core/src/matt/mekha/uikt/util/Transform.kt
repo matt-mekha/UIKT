@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import matt.mekha.uikt.elements.Element
 import matt.mekha.uikt.elements.Scene
 
-public class Transform (
+class Transform (
         var anchor: Vector2? = null,
         var anchorMin: Vector2? = null,
         var anchorMax: Vector2? = null,
@@ -19,15 +19,10 @@ public class Transform (
         var zIndex: Int = 0 // TODO implement
     ) {
 
-    var attachedElement: Element? = null
-        set(value) {
-            field = value
-        }
-
-    private var trueX = 0F
-    private var trueY = 0F
-    private var trueWidth = 0F
-    private var trueHeight = 0F
+    var trueX = 0F
+    var trueY = 0F
+    var trueWidth = 0F
+    var trueHeight = 0F
 
     private val containerSize
         get() = Vector2(trueWidth, trueHeight)
@@ -37,8 +32,8 @@ public class Transform (
 
     private fun scale(anchor: Vector2, containerSize: Vector2) = anchor * containerSize
 
-    fun calculate() {
-        val containerSize = attachedElement!!.parent?.transform?.containerSize ?: Scene.size
+    fun calculate(attachedElement: Element) {
+        val containerSize = attachedElement.parent?.transform?.containerSize ?: Scene.size
 
         val oneAnchor = anchor != null
 
@@ -66,8 +61,8 @@ public class Transform (
             trueHeight = trueAnchorMax.y - trueAnchorMin.y - top - bottom
         }
 
-        trueX += attachedElement!!.parent?.transform?.trueX ?: 0F
-        trueY += attachedElement!!.parent?.transform?.trueY ?: 0F
+        trueX += attachedElement.parent?.transform?.trueX ?: 0F
+        trueY += attachedElement.parent?.transform?.trueY ?: 0F
     }
 
 }

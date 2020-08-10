@@ -10,10 +10,7 @@ import matt.mekha.uikt.elements.Scene
 
 public object UIKT : ApplicationAdapter() {
 
-    private lateinit var batch: SpriteBatch
-
     override fun create() {
-        batch = SpriteBatch()
         Scene.resize()
     }
 
@@ -21,9 +18,7 @@ public object UIKT : ApplicationAdapter() {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
-        batch.begin()
-        Scene.drawEverything(batch)
-        batch.end()
+        Scene.drawEverything()
     }
 
     override fun resize(width: Int, height: Int) {
@@ -31,7 +26,7 @@ public object UIKT : ApplicationAdapter() {
     }
 
     override fun dispose() {
-        batch.dispose()
+        // TODO Scene.dispose()
     }
 
     public fun init(windowConfig: WindowConfig) {
