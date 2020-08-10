@@ -9,13 +9,13 @@ buildscript {
         jcenter()
         google()
     }
+
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
 allprojects {
-
     version = '1.0'
     ext {
         appName = "UIKT"
@@ -36,24 +36,22 @@ allprojects {
     }
 }
 
-project(":desktop") {
+project(":core") {
     apply plugin: "kotlin"
 
+    dependencies {
+        api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    }
+}
+
+project(":example") {
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    }
-}
-
-project(":core") {
-    apply plugin: "kotlin"
-
-
-    dependencies {
-        api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     }
 }
