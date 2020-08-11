@@ -49,7 +49,7 @@ abstract class Element(val transform: Transform) {
         return if (bestResult == null && this is Button && transform.bounds.contains(x.toFloat(), y.toFloat())) {
             this
         } else {
-            null
+            bestResult
         }
     }
 
