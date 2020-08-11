@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import matt.mekha.uikt.elements.Scene
+import matt.mekha.uikt.util.WindowConfig
 
 object UIKT : ApplicationAdapter() {
 

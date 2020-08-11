@@ -38,6 +38,21 @@ abstract class Element(val transform: Transform) {
         }
     }
 
+    fun raycast(x: Int, y: Int) : Button? {
+        var bestResult: Button? = null
+        for (child in children) {
+            val result = child.raycast(x, y)
+            if (result != null && (bestResult == null || result.transform.zIndex >= bestResult.transform.zIndex)) {
+                bestResult = result
+            }
+        }
+        return if (bestResult == null && this is Button && transform.bounds.contains(x.toFloat(), y.toFloat())) {
+            this
+        } else {
+            null
+        }
+    }
+
     open fun draw() {
         throw NotImplementedError()
     }

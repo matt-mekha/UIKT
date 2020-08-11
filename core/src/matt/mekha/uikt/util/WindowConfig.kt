@@ -1,6 +1,6 @@
-package matt.mekha.uikt
+package matt.mekha.uikt.util
 
-public data class WindowConfig(
+data class WindowConfig(
     var width: Int = 1600,
     var height: Int = 900,
     var resizeable: Boolean = true,

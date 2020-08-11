@@ -1,5 +1,6 @@
 package matt.mekha.uikt.util
 
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import matt.mekha.uikt.elements.Element
 import matt.mekha.uikt.elements.Scene
@@ -28,6 +29,8 @@ class Transform (
 
     private val containerSize
         get() = Vector2(trueWidth, trueHeight)
+    val bounds
+        get() = Rectangle(trueX, trueY, trueWidth, trueHeight)
 
     private lateinit var trueAnchorMin: Vector2
     private lateinit var trueAnchorMax: Vector2
