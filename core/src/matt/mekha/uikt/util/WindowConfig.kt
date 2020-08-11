@@ -1,8 +1,8 @@
 package matt.mekha.uikt.util
 
 data class WindowConfig(
-    var width: Int = 1600,
-    var height: Int = 900,
-    var resizeable: Boolean = true,
-    var fullscreen: Boolean = false
+    val width: Int = 1600,
+    val height: Int = 900,
+    val resizeable: Boolean = true,
+    val fullscreen: Boolean = false
 )
