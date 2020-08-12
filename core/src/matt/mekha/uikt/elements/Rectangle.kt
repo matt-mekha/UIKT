@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import matt.mekha.uikt.util.Transform
 
-class Rectangle(var color: Color, transform: Transform) : Element(transform) {
+class Rectangle(transform: Transform, private val color: Color) : Element(transform) {
 
     override fun draw() {
         val shapeRenderer = ShapeRenderer()

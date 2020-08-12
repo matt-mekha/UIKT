@@ -38,15 +38,15 @@ abstract class Element(val transform: Transform) {
         }
     }
 
-    fun raycast(x: Int, y: Int) : Button? {
-        var bestResult: Button? = null
+    fun raycast(x: Float, y: Float) : Interactable? {
+        var bestResult: Interactable? = null
         for (child in children) {
             val result = child.raycast(x, y)
             if (result != null && (bestResult == null || result.transform.zIndex >= bestResult.transform.zIndex)) {
                 bestResult = result
             }
         }
-        return if (bestResult == null && this is Button && transform.bounds.contains(x.toFloat(), y.toFloat())) {
+        return if (bestResult == null && this is Button && transform.bounds.contains(x, y)) {
             this
         } else {
             bestResult

@@ -1,17 +1,20 @@
 package matt.mekha.uikt
 
 import com.badlogic.gdx.ApplicationAdapter
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import matt.mekha.uikt.elements.Scene
+import matt.mekha.uikt.util.InputProcessor
 import matt.mekha.uikt.util.WindowConfig
 
 object UIKT : ApplicationAdapter() {
 
-    val assetManager = AssetManager()
+    internal val assetManager = AssetManager()
 
     override fun create() {
+        Gdx.input.inputProcessor = InputProcessor
         Scene.resize()
     }
 

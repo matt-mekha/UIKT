@@ -25,11 +25,17 @@ class Transform (
     ) {
 
     var trueX = 0F
+        private set
     var trueY = 0F
+        private set
     var trueWidth = 0F
+        private set
     var trueHeight = 0F
+        private set
     var trueXScale = 0F
+        private set
     var trueYScale = 0F
+        private set
 
     private val containerSize
         get() = Vector2(trueWidth, trueHeight)

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import matt.mekha.uikt.UIKT
 import matt.mekha.uikt.util.Transform
 
-class Image(private val filePath: String, transform: Transform) : Element(transform) {
+class Image(transform: Transform, private val filePath: String) : Element(transform) {
 
     init {
         UIKT.assetManager.load(filePath, Texture::class.java)
