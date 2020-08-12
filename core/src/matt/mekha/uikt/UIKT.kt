@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import matt.mekha.uikt.elements.Scene
 import matt.mekha.uikt.util.InputProcessor
 import matt.mekha.uikt.util.WindowConfig
@@ -12,15 +13,19 @@ import matt.mekha.uikt.util.WindowConfig
 object UIKT : ApplicationAdapter() {
 
     internal val assetManager = AssetManager()
+    private lateinit var spriteBatch: SpriteBatch
 
     override fun create() {
+        spriteBatch = SpriteBatch()
         Gdx.input.inputProcessor = InputProcessor
         Scene.resize()
     }
 
     override fun render() {
         assetManager.update()
-        Scene.drawEverything()
+        spriteBatch.begin()
+        Scene.drawEverything(spriteBatch)
+        spriteBatch.end()
     }
 
     override fun resize(width: Int, height: Int) {
@@ -28,7 +33,7 @@ object UIKT : ApplicationAdapter() {
     }
 
     override fun dispose() {
-        // TODO Scene.dispose()
+        spriteBatch.dispose()
     }
 
     fun init(windowConfig: WindowConfig) {

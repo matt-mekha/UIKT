@@ -1,29 +1,30 @@
 package matt.mekha.uikt.elements
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import matt.mekha.uikt.UIKT
 import matt.mekha.uikt.util.Transform
 
-class ImageTintButton(
+class RectangleTintButton(
         transform: Transform,
-        private val imageFilePath: String,
         private val idleImageTint: Color = Color.WHITE,
         private val hoverImageTint: Color = Color.WHITE,
         private val heldImageTint: Color = Color.WHITE,
         onClickAction: (() -> Unit)?
 ) : Button(transform, onClickAction) {
 
-    init {
-        UIKT.assetManager.load(imageFilePath, Texture::class.java)
+    private lateinit var texture: Texture
+
+    override fun firstDraw() {
+        val pixmap = Pixmap(1, 1, Pixmap.Format.RGB888)
+        pixmap.setColor(Color.WHITE)
+        pixmap.fill()
+
+        texture = Texture(pixmap)
     }
 
     override fun draw(batch: SpriteBatch) {
-        if (!UIKT.assetManager.isLoaded(imageFilePath)) {
-            return
-        }
-
         batch.color = when (buttonState) {
             ButtonState.IDLE -> idleImageTint
             ButtonState.HOVER -> hoverImageTint
@@ -31,7 +32,7 @@ class ImageTintButton(
         }
 
         batch.draw(
-                UIKT.assetManager.get(imageFilePath, Texture::class.java),
+                texture,
                 transform.trueX, transform.trueY, transform.trueWidth, transform.trueHeight
         )
 

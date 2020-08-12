@@ -11,21 +11,15 @@ class Image(transform: Transform, private val filePath: String) : Element(transf
         UIKT.assetManager.load(filePath, Texture::class.java)
     }
 
-    override fun draw() {
+    override fun draw(batch: SpriteBatch) {
         if (!UIKT.assetManager.isLoaded(filePath)) {
             return
         }
-
-        val batch = SpriteBatch()
-        batch.begin()
 
         batch.draw(
                 UIKT.assetManager.get(filePath, Texture::class.java),
                 transform.trueX, transform.trueY, transform.trueWidth, transform.trueHeight
         )
-
-        batch.end()
-        batch.dispose() // TODO more efficient way
     }
 
 }

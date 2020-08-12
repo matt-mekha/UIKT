@@ -15,27 +15,35 @@ fun main() {
                     anchor = Vector2(0.5F, 0.5F),
                     width = 200f,
                     height = 100f,
-                    yPivot = 0f,
-                    yOffset = 10f
+                    yOffset = 60f
             ),
             "ButtonIdle.png",
             "ButtonHover.png",
             "ButtonHeld.png"
-    ) { println("click!") }
+    ) { println("click one!") }
 
-    val button2 = ImageTintButton(
+    val button2 = RectangleTintButton(
             Transform(
                     anchor = Vector2(0.5F, 0.5F),
                     width = 200f,
                     height = 100f,
-                    yPivot = 1f,
-                    yOffset = -10f
+                    yOffset = -60f
             ),
-            "ButtonIdle.png",
+            idleImageTint = Color.BLUE,
             hoverImageTint = Color.SKY,
             heldImageTint = Color.YELLOW
-    ) { println("click!") }
+    ) { println("click two!") }
 
-    button1.parent = Scene
-    button2.parent = Scene
+    val rect = Rectangle(
+            Transform(
+                    anchor = Vector2(0.5f, 0.5f),
+                    width = 240f,
+                    height = 260f
+            ),
+            Color.GRAY
+    )
+
+    button1.parent = rect
+    button2.parent = rect
+    rect.parent = Scene
 }

@@ -1,5 +1,6 @@
 package matt.mekha.uikt.elements
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import matt.mekha.uikt.util.Transform
 
 abstract class Element(val transform: Transform) {
@@ -15,20 +16,14 @@ abstract class Element(val transform: Transform) {
         }
     private val children = ArrayList<Element>()
 
+    private var firstDraw = true
+
     private fun removeChild(child: Element) {
         children.remove(child)
     }
 
     private fun addChild(child: Element) {
         children.add(child)
-    }
-
-    fun drawEverything() {
-        draw()
-        children.sortBy { it.transform.zIndex }
-        for (child in children) {
-            child.drawEverything()
-        }
     }
 
     open fun resize() {
@@ -53,7 +48,21 @@ abstract class Element(val transform: Transform) {
         }
     }
 
-    open fun draw() {
+    fun drawEverything(batch: SpriteBatch) {
+        if(firstDraw) {
+            firstDraw = false
+            firstDraw()
+        }
+        draw(batch)
+        children.sortBy { it.transform.zIndex }
+        for (child in children) {
+            child.drawEverything(batch)
+        }
+    }
+
+    open fun firstDraw() {}
+
+    open fun draw(batch: SpriteBatch) {
         throw NotImplementedError()
     }
 

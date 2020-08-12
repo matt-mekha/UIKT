@@ -19,7 +19,7 @@ class ImageSwitchButton(
         UIKT.assetManager.load(heldImageFilePath, Texture::class.java)
     }
 
-    override fun draw() {
+    override fun draw(batch: SpriteBatch) {
         val filePath = when (buttonState) {
             ButtonState.IDLE -> idleImageFilePath
             ButtonState.HOVER -> hoverImageFilePath
@@ -30,16 +30,10 @@ class ImageSwitchButton(
             return
         }
 
-        val batch = SpriteBatch()
-        batch.begin()
-
         batch.draw(
                 UIKT.assetManager.get(filePath, Texture::class.java),
                 transform.trueX, transform.trueY, transform.trueWidth, transform.trueHeight
         )
-
-        batch.end()
-        batch.dispose() // TODO more efficient way
     }
 
 }

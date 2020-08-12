@@ -9,7 +9,7 @@ object InputProcessor : InputAdapter() {
     private var buttonLastHover: Interactable? = null
     private var buttonLastMouseDown: Interactable? = null
 
-    fun raycast(x: Int, y: Int) : Interactable? = Scene.raycast(x.toFloat(), Scene.size.y - y)
+    private fun raycast(x: Int, y: Int) : Interactable? = Scene.raycast(x.toFloat(), Scene.size.y - y)
 
     override fun touchDown(x: Int, y: Int, pointer: Int, button: Int): Boolean {
         val hit = raycast(x, y)
