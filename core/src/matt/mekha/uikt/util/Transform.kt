@@ -19,6 +19,8 @@ class Transform (
         var yOffset: Float = 0F,
         var xPivot: Float = 0.5F,
         var yPivot: Float = 0.5F,
+        var xScale: Float = 1f,
+        var yScale: Float = 1f,
         var zIndex: Int = 0
     ) {
 
@@ -26,6 +28,8 @@ class Transform (
     var trueY = 0F
     var trueWidth = 0F
     var trueHeight = 0F
+    var trueXScale = 0F
+    var trueYScale = 0F
 
     private val containerSize
         get() = Vector2(trueWidth, trueHeight)
@@ -35,11 +39,7 @@ class Transform (
     private lateinit var trueAnchorMin: Vector2
     private lateinit var trueAnchorMax: Vector2
 
-    private fun scale(anchor: Vector2, containerSize: Vector2) = anchor * containerSize
-
     fun calculate(attachedElement: Element) {
-        val containerSize = attachedElement.parent?.transform?.containerSize ?: Scene.size
-
         val oneAnchor = anchor != null
 
         if(oneAnchor) {
@@ -47,23 +47,30 @@ class Transform (
             anchorMax = anchor!!
         }
 
-        trueAnchorMin = scale(anchorMin!!, containerSize)
-        trueAnchorMax = scale(anchorMax!!, containerSize)
+        val parentContainerSize = attachedElement.parent?.transform?.containerSize ?: Scene.size
+        trueAnchorMin = anchorMin!! * parentContainerSize
+        trueAnchorMax = anchorMax!! * parentContainerSize
+
+        val parentXScale = attachedElement.parent?.transform?.trueXScale ?: 1f
+        trueXScale = xScale * parentXScale
+
+        val parentYScale = attachedElement.parent?.transform?.trueYScale ?: 1f
+        trueYScale = yScale * parentYScale
 
         if (oneAnchor || anchorMin!!.x == anchorMax!!.x) {
-            trueX = trueAnchorMin.x - width!! * xPivot + xOffset
-            trueWidth = width!!
+            trueX = trueAnchorMin.x - (width!! * xPivot * trueXScale) + (xOffset * parentXScale)
+            trueWidth = width!! * trueXScale
         } else {
-            trueX = trueAnchorMin.x + left
-            trueWidth = trueAnchorMax.x - trueAnchorMin.x - right - left
+            trueX = trueAnchorMin.x + (left * parentXScale)
+            trueWidth = trueAnchorMax.x - trueAnchorMin.x - (right + left) * parentXScale
         }
 
         if (oneAnchor || anchorMin!!.y == anchorMax!!.y) {
-            trueY = trueAnchorMin.y - height!! * yPivot + yOffset
-            trueHeight = height!!
+            trueY = trueAnchorMin.y - (height!! * yPivot * trueYScale) + (yOffset * parentYScale)
+            trueHeight = height!! * trueYScale
         } else {
-            trueY = trueAnchorMin.y + bottom
-            trueHeight = trueAnchorMax.y - trueAnchorMin.y - top - bottom
+            trueY = trueAnchorMin.y + (bottom * parentYScale)
+            trueHeight = trueAnchorMax.y - trueAnchorMin.y - (top + bottom) * parentYScale
         }
 
         trueX += attachedElement.parent?.transform?.trueX ?: 0F

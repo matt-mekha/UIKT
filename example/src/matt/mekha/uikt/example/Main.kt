@@ -21,10 +21,9 @@ fun main() {
     val img = Image("image.png", Transform(
             anchor = Vector2(0.5F, 0.5F),
             width = 256f,
-            height = 256f,
-            zIndex = 1
+            height = 256f
     ))
 
     rect.parent = Scene
-    img.parent = Scene
+    img.parent = rect
 }

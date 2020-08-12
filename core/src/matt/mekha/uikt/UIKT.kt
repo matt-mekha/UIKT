@@ -11,10 +11,7 @@ object UIKT : ApplicationAdapter() {
 
     val assetManager = AssetManager()
 
-    private var ready = false
-
     override fun create() {
-        ready = true
         Scene.resize()
     }
 
